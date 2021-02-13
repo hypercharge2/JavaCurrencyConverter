@@ -1,6 +1,8 @@
  package convert;
 
 import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -11,6 +13,11 @@ import javax.swing.JPanel;
 
 public class Main {
 
+	//go to exchangerate-api.com for your api key
+	static String apiKey = "your key";
+	
+	
+	
 	public static void main(String[] args) {
 	JFrame mainframe = new JFrame("Currency Converter");
 	mainframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -34,8 +41,21 @@ public class Main {
 	JLabel outputcurrencyL = new JLabel("Currency to convert to: (No dropdown yet)");
 	JComboBox<Object> outputc = new JComboBox<Object>(currencies);
 	
+	JLabel output = new JLabel("Output: ");
 	JButton submit = new JButton();
-	JLabel output = new JLabel("Output: (No output function yet)");
+	submit.setText("Submit");
+	
+	ActionListener submitAction = new ActionListener() {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+		Convert.convert(apiKey, inputc.getSelectedItem().toString(), inpamount.getText(), outputc.getSelectedItem().toString());
+			
+		}
+		
+	};
+	submit.addActionListener(submitAction);
+	
 	
 	
 	
